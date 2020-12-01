@@ -1,14 +1,14 @@
 # General Data Loading with Redux from outside API
 
-## Component gets rendered onto the screen
+## Components are generally responsible for fetching data they need by calling an action creator
+
+### Component gets rendered onto the screen
 
 PostList components needs to get a list of posts from the API
 
-## Component's 'componentDidMount' lifecycle method gets called
+### Component's 'componentDidMount' lifecycle method gets called
 
 Access to lifecycle methods
-
-## Components are generally responsible for fetching data they need by calling an action creator
 
 ### We call action creator from 'componentDidMount'
 
