@@ -37,3 +37,25 @@ Reducer watching for the type given to the action
 ### Because we generated some new state object, redux/react-redux cause our React app to be rerendered
 
 State changes so app rerenders
+
+## Middleware in Redux
+
+Function that gets called with every action we dispatch
+
+Has the ability to STOP, MODIFY, or otherwise change actions
+
+Tons of open source middleware exist
+
+Most popular use of middleware is for dealing with async actions
+
+We using Redux-Thunk to solve our async issues
+
+## Rules of Reducers
+
+Must return any value besides 'undefined'
+
+Produces 'state', or data to be used inside of your app using only previous state and the action (reducers are pure)
+
+Must not return reach 'out of itself' to decide what value to return
+
+Must not mutate its input 'state' argument
