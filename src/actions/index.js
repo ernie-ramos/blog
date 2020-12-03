@@ -1,10 +1,25 @@
 import _ from 'lodash';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
+// Becomes the only action creator we will interact with
+// Will call fetchPosts and fetchUser for us
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
+  await dispatch(fetchPosts()); //redux thunk will pick this up and update reducer
+
+  const userIds = _.uniq(_.map(getState().posts, 'userId'));
+  userIds.forEach((id) => dispatch(fetchUser(id)));
+};
+
 export const fetchPosts = () => async (dispatch) => {
   const response = await jsonPlaceholder.get('/posts');
 
-  dispatch({ type: 'FETCH_POSTS', payload: response.data });
+  dispatch({ type: 'FETCH_POSTS', payload: response.data }); //returns an {}
+};
+
+export const fetchUser = (id) => async (dispatch) => {
+  const response = await jsonPlaceholder.get(`/users/${id}`);
+
+  dispatch({ type: 'FETCH_USER', payload: response.data });
 };
 
 // Memoized version
@@ -15,9 +30,3 @@ export const fetchPosts = () => async (dispatch) => {
 
 //   dispatch({ type: 'FETCH_USER', payload: response.data });
 // });
-
-export const fetchUser = (id) => async (dispatch) => {
-  const response = await jsonPlaceholder.get(`/users/${id}`);
-
-  dispatch({ type: 'FETCH_USER', payload: response.data });
-};
